@@ -18,7 +18,7 @@ app.get("/", function (request, response) {
   
 });
 
-app.get("/new/:str", function (request, response) {
+app.get("/:str", function (request, response) {
   console.log(window.location.href);
   response.sendStatus(200);
 });
