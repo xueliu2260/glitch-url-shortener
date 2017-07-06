@@ -12,97 +12,75 @@ var app = express();
 app.use(express.static('public'));
 
 // http://expressjs.com/en/starter/basic-routing.html
-app.get("/", function (request, response) {
+app.get("/new/:str", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
+  console.log(request.str);
 });
 
 app.get("/dreams", function (request, response) {
-  response.send(dreams);
 });
 
 // could also use the POST body instead of query string: http://expressjs.com/en/api.html#req.body
 app.post("/dreams", function (request, response) {
-  dreams.push(request.query.dream);
   response.sendStatus(200);
 });
 
-// Simple in-memory store for now
-var dreams = [
-  "Find and count some sheep",
-  "Climb a really tall mountain",
-  "Wash the dishes"
-];
-var mongodb = require('mongodb');
 
-//We need to work with "MongoClient" interface in order to connect to a mongodb server.
-var MongoClient = mongodb.MongoClient;
-var test = require('assert');
-// // Connection URL. This is where your mongodb server is running.
+// var mongodb = require('mongodb');
 
-// //(Focus on This Variable)
-var url = 'mongodb://liuerbaozi2260:zja900530@ds137220.mlab.com:37220/glitch-project';      
-// //(Focus on This Variable)
+// //We need to work with "MongoClient" interface in order to connect to a mongodb server.
+// var MongoClient = mongodb.MongoClient;
+// var test = require('assert');
+// // // Connection URL. This is where your mongodb server is running.
 
-// // Use connect method to connect to the Server
-MongoClient.connect(url, function (err, db) {
-if (err) {
-  console.log('Unable to connect to the mongoDB server. Error:', err);
-  } else {
-  console.log('Connection established to ', url);
+// // //(Focus on This Variable)
+// var url = 'mongodb://liuerbaozi2260:zja900530@ds137220.mlab.com:37220/glitch-project';      
+// // //(Focus on This Variable)
 
-//     // do some work here with the database.
-//     var col = db.collection('createIndexExample1');
-//   // Insert a bunch of documents
-//     col.insert([{a:1, b:1}
-//     , {a:2, b:2}, {a:3, b:3}
-//     , {a:4, b:4}], {w:1}, function(err, result) {
-//     test.equal(null, err);
-//     // Show that duplicate records got dropped
-//     col.aggregation({}, {cursor: {}}).toArray(function(err, items) {
+// // // Use connect method to connect to the Server
+// MongoClient.connect(url, function (err, db) {
+// if (err) {
+//   console.log('Unable to connect to the mongoDB server. Error:', err);
+//   } else {
+//   console.log('Connection established to ', url);
+
+// var docs = [{
+//       title : "this is my title", author : "bob", posted : new Date() ,
+//       pageViews : 5, tags : [ "fun" , "good" , "fun" ], other : { foo : 5 },
+//       comments : [
+//         { author :"joe", text : "this is cool" }, { author :"sam", text : "this is bad" }
+//       ]}];
+
+//   // Create a collection
+//   var collection = db.collection('aggregation_each_example');
+//   // Insert the docs
+//   collection.insertMany(docs, {w: 1}, function(err, result) {
+
+//     // Execute aggregate, notice the pipeline is expressed as an Array
+//     var cursor = collection.aggregate([
+//         { $project : {
+//           author : 1,
+//           tags : 1
+//         }},
+//         { $unwind : "$tags" },
+//         { $group : {
+//           _id : {tags : "$tags"},
+//           authors : { $addToSet : "$author" }
+//         }}
+//       ], { cursor: { batchSize: 1 } });
+
+//     // Get all the aggregation results
+//     cursor.each(function(err, docs) {
 //       test.equal(null, err);
-//       test.equal(4, items.length);
-//       db.close();
+
+//       if(docs == null) {
+//         db.close();
+//       }
+//       console.log(docs);
 //     });
-//       });
-//   }
+//   });
+// }
 //});
-var docs = [{
-      title : "this is my title", author : "bob", posted : new Date() ,
-      pageViews : 5, tags : [ "fun" , "good" , "fun" ], other : { foo : 5 },
-      comments : [
-        { author :"joe", text : "this is cool" }, { author :"sam", text : "this is bad" }
-      ]}];
-
-  // Create a collection
-  var collection = db.collection('aggregation_each_example');
-  // Insert the docs
-  collection.insertMany(docs, {w: 1}, function(err, result) {
-
-    // Execute aggregate, notice the pipeline is expressed as an Array
-    var cursor = collection.aggregate([
-        { $project : {
-          author : 1,
-          tags : 1
-        }},
-        { $unwind : "$tags" },
-        { $group : {
-          _id : {tags : "$tags"},
-          authors : { $addToSet : "$author" }
-        }}
-      ], { cursor: { batchSize: 1 } });
-
-    // Get all the aggregation results
-    cursor.each(function(err, docs) {
-      test.equal(null, err);
-
-      if(docs == null) {
-        db.close();
-      }
-      console.log(docs);
-    });
-  });
-}
-});
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
   console.log('Your app is listening on port ' + listener.address().port);
