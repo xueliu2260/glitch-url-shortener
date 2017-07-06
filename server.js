@@ -40,7 +40,7 @@ var MongoClient = mongodb.MongoClient;
 // Connection URL. This is where your mongodb server is running.
 
 //(Focus on This Variable)
-var url = 'mongodb://localhost:27017/glitch-project';      
+var url = 'mongodb://liuerbaozi2260:zja900530@ds137220.mlab.com:37220/glitch-project';      
 //(Focus on This Variable)
 
 // Use connect method to connect to the Server
@@ -48,7 +48,7 @@ var url = 'mongodb://localhost:27017/glitch-project';
   if (err) {
     console.log('Unable to connect to the mongoDB server. Error:', err);
   } else {
-    console.log('Connection established to', url);
+    console.log('Connection established to ', url);
 
     // do some work here with the database.
 
