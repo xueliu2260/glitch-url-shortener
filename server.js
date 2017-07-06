@@ -13,16 +13,17 @@ app.use(express.static('public'));
 
 // http://expressjs.com/en/starter/basic-routing.html
 app.get("/", function (request, response) {
+  
   response.sendFile(__dirname + '/views/index.html');
   
 });
 
-app.get("/:str", function (request, response) {
-  console.log(request.params.str);
+app.get("/new/:str", function (request, response) {
+  console.log(window.location.href);
   response.sendStatus(200);
 });
 
-app.post("/:str", function (request, response) {
+app.post("/new/:str", function (request, response) {
   console.log(request.params.str);
   response.sendStatus(200);
 });
