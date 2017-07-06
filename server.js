@@ -18,8 +18,8 @@ app.get("/", function (request, response) {
   
 });
 
-app.get("/new/:str", function (request, response) {
-  console.log(request.params.str);
+app.get("/new/", function (request, response) {
+  console.log(request.params.url);
   response.sendStatus(200);
 });
 
