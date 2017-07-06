@@ -41,7 +41,7 @@ if (err) {
   // Create a collection
   var collection = db.collection('url-shortener-database');
   // Insert the docs
-  var size = Math.random(100);
+  var size = Math.floor(Math.random() * 100);
     console.log(getUri);
   collection.insertOne({"_id":size, "url": getUri});
 
