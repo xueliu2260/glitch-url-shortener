@@ -19,12 +19,8 @@ app.get("/", function (request, response) {
 });
 var getUri;
 app.get("/new/*", function (request, response) {
-  getUri = request.params[0];
-  response.sendStatus(200);
-});
-
-
-var mongodb = require('mongodb');
+  getUri = request.params[0].toString();
+  var mongodb = require('mongodb');
 
 //We need to work with "MongoClient" interface in order to connect to a mongodb server.
 var MongoClient = mongodb.MongoClient;
@@ -45,11 +41,17 @@ if (err) {
   // Create a collection
   var collection = db.collection('url-shortener-database');
   // Insert the docs
-  var size = Math.random(100).toString();
-  collection.insertOne({getUri: {$exists : false}}, {$set: {size: getUri}});
+  var size = Math.random(100);
+    console.log(getUri);
+  collection.insertOne({"_id":size, "url": getUri});
 
   }
 })
+  response.sendStatus(200);
+});
+
+
+
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
   console.log('Your app is listening on port ' + listener.address().port);
