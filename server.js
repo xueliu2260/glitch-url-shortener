@@ -45,8 +45,8 @@ if (err) {
   // Create a collection
   var collection = db.collection('url-shortener-database');
   // Insert the docs
-  var size = Object.bsonsize(collection.find({test:"auto"}))+1;
-  collection.update({getUri: {$exists : false}}, {$set: {size: getUri}});
+  var size = Math.random(100).toString();
+  collection.insertOne({getUri: {$exists : false}}, {$set: {size: getUri}});
 
   }
 })
