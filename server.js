@@ -17,16 +17,11 @@ app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
   
 });
-
+var getUri;
 app.get("/new/*", function (request, response) {
-  console.log(request.params[0]);
+  getUri = request.params[0];
   response.sendStatus(200);
 });
-
-// app.post("/new/:str", function (request, response) {
-//   console.log(request.params.str);
-//   response.sendStatus(200);
-// });
 
 
 // var mongodb = require('mongodb');
