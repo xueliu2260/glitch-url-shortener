@@ -98,6 +98,7 @@ var docs = [{
       if(docs == null) {
         db.close();
       }
+      console.log(docs);
     });
   });
 }
