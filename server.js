@@ -12,16 +12,18 @@ var app = express();
 app.use(express.static('public'));
 
 // http://expressjs.com/en/starter/basic-routing.html
-app.get("/new/:str", function (request, response) {
+app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
-  console.log(request.str);
+  
 });
 
-app.get("/dreams", function (request, response) {
+app.get("/:str", function (request, response) {
+  console.log(request.params.str);
+  response.sendStatus(200);
 });
 
-// could also use the POST body instead of query string: http://expressjs.com/en/api.html#req.body
-app.post("/dreams", function (request, response) {
+app.post("/:str", function (request, response) {
+  console.log(request.params.str);
   response.sendStatus(200);
 });
 
