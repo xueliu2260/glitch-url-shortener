@@ -50,7 +50,7 @@ app.get("/new/*", function (request, response) {
 //       ]}];
 
 //   // Create a collection
-//   var collection = db.collection('aggregation_each_example');
+//   var collection = db.getCollection('url-shortener-database');
 //   // Insert the docs
 //   collection.insertMany(docs, {w: 1}, function(err, result) {
 
