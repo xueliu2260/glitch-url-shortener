@@ -36,7 +36,7 @@ var mongodb = require('mongodb');
 
 //We need to work with "MongoClient" interface in order to connect to a mongodb server.
 var MongoClient = mongodb.MongoClient;
-
+var test = require('assert');
 // Connection URL. This is where your mongodb server is running.
 
 //(Focus on This Variable)
@@ -51,9 +51,19 @@ var url = 'mongodb://liuerbaozi2260:zja900530@ds137220.mlab.com:37220/glitch-pro
     console.log('Connection established to ', url);
 
     // do some work here with the database.
-
-    //Close connection
-    db.close();
+    var col = db.collection('createIndexExample1');
+  // Insert a bunch of documents
+    col.insert([{a:1, b:1}
+    , {a:2, b:2}, {a:3, b:3}
+    , {a:4, b:4}], {w:1}, function(err, result) {
+    test.equal(null, err);
+    // Show that duplicate records got dropped
+    col.aggregation({}, {cursor: {}}).toArray(function(err, items) {
+      test.equal(null, err);
+      test.equal(4, items.length);
+      db.close();
+    });
+      });
   }
 });
 
