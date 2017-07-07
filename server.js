@@ -57,16 +57,36 @@ app.get("/new/:shortcode", function (request, response) {
 });
 app.get("/new/*", function (request, response) {
   getUri = request.params[0].toString();
-  var size = Math.floor(Math.random() * 100);
+  var size = Date.now();
     console.log(getUri);
-  collection.insertOne({"_id":size, "url": getUri});
+  if(validateUrl(getUri)){
+    collection.insertOne({"_id":size, "url": getUri});
+    response.status(200).json({_id:size, url:getUri});
+  }else{
+    response.status(500).json({error:"This url is not valid."});
+  }
+  
 
 // // Use connect method to connect to the Server
 
   response.sendStatus(200);
 });
 
-
+function validateUrl(requesturl) {
+  
+  // http://stackoverflow.com/questions/1303872/trying-to-validate-url-using-javascript
+  // jQuery :troll:
+  var urlRegex = new RegExp([
+    /(?:(?:(https?|ftp):)?\/\/)/      // protocol
+    ,/(?:([^:\n\r]+):([^@\n\r]+)@)?/  // user:pass
+    ,/(?:(?:www\.)?([^\/\n\r]+))/     // domain
+    ,/(\/[^?\n\r]+)?/                 // request
+    ,/(\?[^#\n\r]*)?/                 // query
+    ,/(#?[^\n\r]*)?/                  // anchor
+  ].map(function(r) {return r.source}).join(''));
+  
+  return urlRegex.test(requesturl);
+}
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
