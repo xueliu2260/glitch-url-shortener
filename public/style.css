@@ -10,12 +10,10 @@
   
 }
 .newline{
-  margin-top:10px;
+  margin-top:5px;
   display:block;
 }
-p{
-  margin-left:40px;
-}
+
 body {
   font-family: helvetica, arial, sans-serif;
   margin: 25px;
