@@ -7,13 +7,19 @@
 * {
   box-sizing: border-box;
   margin-left:20px;
+  
 }
-
+.link{
+  margin-top:10px;
+  display:block;
+}
 body {
   font-family: helvetica, arial, sans-serif;
   margin: 25px;
 }
-
+.high-light{
+  background-color:pink;
+}
 h1 {
   font-weight: bold;
 }
