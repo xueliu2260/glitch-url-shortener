@@ -44,14 +44,14 @@ if (err) {
 })
 app.get("/new/:shortcode", function (request, response) {
   var shortCode = parseInt(request.params.shortcode);
-  console.log("here");
+  //console.log("here");
   collection.findOne({ '_id' : shortCode }, function(err, docs) {
     if(err) if(err) throw err;
     if(docs == null) {
       response.status(404).json({error:"This url is not on the database."});
     }
     else {
-      response.redirect(docs.original_url);
+      response.redirect(docs.url);
     }    
   });
 });
