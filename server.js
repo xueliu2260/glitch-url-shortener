@@ -18,8 +18,6 @@ app.get("/", function (request, response) {
   
 });
 var getUri;
-app.get("/new/*", function (request, response) {
-  getUri = request.params[0].toString();
   var mongodb = require('mongodb');
 
 //We need to work with "MongoClient" interface in order to connect to a mongodb server.
@@ -30,8 +28,7 @@ var test = require('assert');
 // //(Focus on This Variable)
 var url = 'mongodb://liuerbaozi2260:zja900530@ds137220.mlab.com:37220/glitch-project';      
 // //(Focus on This Variable)
-
-// // Use connect method to connect to the Server
+var collection;
 MongoClient.connect(url, function (err, db) {
 if (err) {
   console.log('Unable to connect to the mongoDB server. Error:', err);
@@ -39,14 +36,33 @@ if (err) {
   console.log('Connection established to ', url);
 
   // Create a collection
-  var collection = db.collection('url-shortener-database');
+  collection = db.collection('url-shortener-database');
   // Insert the docs
+  
+
+  }
+})
+app.get("/new/:shortcode", function (request, response) {
+  var shortCode = parseInt(request.params.shortcode);
+  console.log("here");
+  collection.findOne({ '_id' : shortCode }, function(err, docs) {
+    if(err) if(err) throw err;
+    if(docs == null) {
+      response.status(404).json({error:"This url is not on the database."});
+    }
+    else {
+      response.redirect(docs.original_url);
+    }    
+  });
+});
+app.get("/new/*", function (request, response) {
+  getUri = request.params[0].toString();
   var size = Math.floor(Math.random() * 100);
     console.log(getUri);
   collection.insertOne({"_id":size, "url": getUri});
 
-  }
-})
+// // Use connect method to connect to the Server
+
   response.sendStatus(200);
 });
 
