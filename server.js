@@ -67,9 +67,6 @@ app.get("/new/*", function (request, response) {
   }
   
 
-// // Use connect method to connect to the Server
-
-  response.sendStatus(200);
 });
 
 function validateUrl(requesturl) {

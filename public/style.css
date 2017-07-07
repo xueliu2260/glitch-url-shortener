@@ -6,6 +6,7 @@
 
 * {
   box-sizing: border-box;
+  margin-left:20px;
 }
 
 body {
@@ -15,68 +16,22 @@ body {
 
 h1 {
   font-weight: bold;
-  color: pink;
 }
 
 .bold {
   font-weight: bold;
 }
 
-p {
-  max-width: 600px;
+h2{
+  font-size:1em;
 }
-
-form {
-  margin-bottom: 25px;
-  padding: 15px;
-  background-color: cyan;
-  display: inline-block;
-  width: 100%;
-  max-width: 340px;
-  border-radius: 3px;
+h3{
+  font-size:1.5em;
+  font-weight:bold;
 }
-
-input {
-  display: block;
-  margin-bottom: 10px;
-  padding: 5px;
-  width: 100%;
-  border: 1px solid lightgrey;
-  border-radius: 3px;
-  font-size: 16px;
+.user-story{
+  margin-left:20px;
 }
-
-button {
-  font-size: 16px;
-  border-radius: 3px;
-  background-color: lightgrey;
-  border: 1px solid grey;
-  box-shadow: 2px 2px teal;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: yellow;
-}
-
-button:active {
-  box-shadow: none;
-}
-
-li {
-  margin-bottom: 5px;
-}
-
-footer {
-  margin-top: 50px;
-  padding-top: 25px;
-  border-top: 1px solid lightgrey;
-}
-
-footer > a {
-  color: #BBBBBB;
-}
-
 .nicejob {
   text-decoration: line-through;
 }
