@@ -9,9 +9,12 @@
   margin-left:20px;
   
 }
-.link{
+.newline{
   margin-top:10px;
   display:block;
+}
+p{
+  margin-left:40px;
 }
 body {
   font-family: helvetica, arial, sans-serif;
